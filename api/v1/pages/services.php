@@ -3,13 +3,13 @@ header('Access-Control-Allow-Origin: *');
 header("Content-Type: application/json; charset=UTF-8");
 
 include_once $_SERVER['DOCUMENT_ROOT'].'/api-for-shop/api/config/database.php';
-include_once $_SERVER['DOCUMENT_ROOT'].'/api-for-shop/api/controllers/pages.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/api-for-shop/api/controllers/servicesclass.php';
 
 $database = new Database();
 $db = $database->getConnection();
 
-$item = new Pages($db);
-$stmt = $item->single('about');
+$items = new Services($db);
+$stmt = $items->read();
 
 $itemCount = $stmt->rowCount();
 
@@ -30,7 +30,7 @@ else:
         array(
             "type"=>"danger",
             "title"=>"Failed",
-            "message"=>"No record found."
+            "message"=>"No records found."
         )
     );
-endif;    
+endif;  

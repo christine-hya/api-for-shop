@@ -1,25 +1,24 @@
 <?php
 
-class Pages {
+class Categories {
     private $conn;
 
-    private $db_table = 'pages';
+    private $db_table = 'categories';
 
     public function __construct($db){
         $this->conn = $db;
     }
 
     public function read() {
-        $query = "SELECT slug,title FROM " . $this->db_table .
-       "  ORDER BY 
-       orderid ASC";
+        $query = "SELECT categories FROM " . $this->db_table;
+       
        $stmt = $this->conn->prepare($query);
        $stmt->execute();
        return $stmt;
     }
 
     public function single($slug) {
-        $query = "SELECT title,content FROM " . $this->db_table .
+        $query = "SELECT title,description FROM " . $this->db_table .
        "  WHERE 
        slug = :slug";
        $stmt = $this->conn->prepare($query);
