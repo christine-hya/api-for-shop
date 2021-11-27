@@ -19,7 +19,7 @@ class Pages {
     }
 
     public function single($slug) {
-        $query = "SELECT title,content FROM " . $this->db_table .
+        $query = "SELECT title,description,image,price FROM " . $this->db_table .
        "  WHERE 
        slug = :slug";
        $stmt = $this->conn->prepare($query);

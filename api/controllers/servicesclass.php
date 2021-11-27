@@ -10,7 +10,7 @@ class Services {
     }
 
     public function read() {
-        $query = "SELECT orderid, slug, title, description, price FROM " . $this->db_table .
+        $query = "SELECT orderid, slug, title, description, price, image FROM " . $this->db_table .
        "  ORDER BY 
        orderid ASC";
        $stmt = $this->conn->prepare($query);
@@ -19,7 +19,7 @@ class Services {
     }
 
     public function single($slug) {
-        $query = "SELECT title,description FROM " . $this->db_table .
+        $query = "SELECT title, description, price, image FROM " . $this->db_table .
        "  WHERE 
        slug = :slug";
        $stmt = $this->conn->prepare($query);
