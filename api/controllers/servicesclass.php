@@ -10,8 +10,8 @@ class Services {
     }
 
     public function read() {
-        $query = "SELECT orderid, slug, title, description, price, image FROM " . $this->db_table .
-       "  ORDER BY 
+        $query = "SELECT b.orderid, b.slug, b.title, b.description, b.price, b.image, a.categories FROM " . $this->db_table .
+       " AS b INNER JOIN categories AS a ON b.categoryId = a.categoryId ORDER BY 
        orderid ASC";
        $stmt = $this->conn->prepare($query);
        $stmt->execute();
@@ -19,8 +19,8 @@ class Services {
     }
 
     public function single($slug) {
-        $query = "SELECT title, description, price, image FROM " . $this->db_table .
-       "  WHERE 
+        $query = "SELECT b.title, b.description, b.price, b.image, a.categories FROM " . $this->db_table .
+       "  AS b INNER JOIN categories AS a ON b.categoryId = a.categoryId WHERE 
        slug = :slug";
        $stmt = $this->conn->prepare($query);
        $stmt->bindParam(":slug", $slug);
