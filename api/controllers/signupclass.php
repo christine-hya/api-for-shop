@@ -2,34 +2,68 @@
 
 //creating table
 
-class Signup {
+class Signup
+{
     private $conn;
 
-    public function __construct($db){
-        $this->conn = $db;       
+    public function __construct($db)
+    {
+        $this->conn = $db;
     }
 
-    public function signup($username, $fname, $lname, $email, $password){
+    public function signup($username, $fname, $lname, $email, $password)
+    {
+        $message = [];
         $json = [];
+        
+
+        $stmtUExists = $this->conn->prepare(
+            "SELECT * FROM users WHERE username=?"
+        );
+        $stmtUExists->execute([$username]);
+
+        $i = 0;
+
+        //if nothing matches that username
+        if ($stmtUExists->fetch() != true) {
+
         $stmt = $this->conn->prepare("INSERT INTO users 
         (username, fname, lname, email, password, active)
         VALUES (?,?,?,?,?,?)");
-        $stmt->execute([$username,
-        $fname,
-        $lname,
-        $email,
-        password_hash($password,
-        PASSWORD_DEFAULT),
-        1]);
+            $stmt->execute([
+                $username,
+                $fname,
+                $lname,
+                $email,
+                password_hash(
+                    $password,
+                    PASSWORD_DEFAULT
+                ),
+                1
+            ]);
+            $i++;
+            //add user to JSON
+           
+            // $username = $json['username'];
+            // $fname = $json['fname'];
+            // $lname = $json['lname'];
+            // $email = $json['email'];
+            // return json_encode($json);
 
-        $stmtReturn = $this->conn->prepare("SELECT id, username, fname, lname, email, password FROM users 
-        WHERE username=? AND active");
-       
+        } else {
+            $message[] = 'User already exists.';
+        }
+
+        $stmtReturn = $this->conn->prepare("SELECT id, username, fname, lname, email FROM users 
+        WHERE username=?");
+
         $stmtReturn->execute([$username]);
-         
+
 
         while ($row = $stmtReturn->fetch(PDO::FETCH_ASSOC)){
+
             if($stmtReturn){
+
                 $json['id'] = $row['id'];
                 $json['username'] = $row['username'];
                 $json['fname'] = $row['fname'];
@@ -38,7 +72,8 @@ class Signup {
                 return json_encode($json);
             }
         }
-        return false;
+        $message[] = 'Inserted ' . $i . ' rows into USERS table';
+        return $message;
     }
 }
 
