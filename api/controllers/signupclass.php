@@ -54,7 +54,7 @@ class Signup
             $message[] = 'User already exists.';
         }
 
-        $stmtReturn = $this->conn->prepare("SELECT id, username, fname, lname, email FROM users 
+        $stmtReturn = $this->conn->prepare("SELECT userId, username, fname, lname, email FROM users 
         WHERE username=?");
 
         $stmtReturn->execute([$username]);
@@ -64,7 +64,7 @@ class Signup
 
             if($stmtReturn){
 
-                $json['id'] = $row['id'];
+                $json['userId'] = $row['userId'];
                 $json['username'] = $row['username'];
                 $json['fname'] = $row['fname'];
                 $json['lname'] = $row['lname'];

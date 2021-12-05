@@ -12,12 +12,12 @@ class Users {
     
     public function auth($username, $password){
         $json = [];
-        $stmt = $this->conn->prepare("SELECT id, username, fname, lname, email, password FROM " . $this->db_table .
+        $stmt = $this->conn->prepare("SELECT userId, username, fname, lname, email, password FROM " . $this->db_table .
         " WHERE username=? AND active");
         $stmt->execute([$username]);
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
             if(password_verify($password, $row['password'])){
-                $json['id'] = $row['id'];
+                $json['userId'] = $row['userId'];
                 $json['username'] = $row['username'];
                 $json['fname'] = $row['fname'];
                 $json['lname'] = $row['lname'];
