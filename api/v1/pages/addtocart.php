@@ -22,8 +22,6 @@ $item = new Addtocart($db);
 $messages = $item->createCart();
 $stmt = $item->addtoCart($slug, $userId);
 
-
-    
 http_response_code(200);
 
     foreach ($messages as $message) {

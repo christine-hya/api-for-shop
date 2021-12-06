@@ -39,11 +39,9 @@ class Addtocart {
 
                 //select the product to be inserted
                 $query = "SELECT * FROM services WHERE slug=:slug";
-
                 $stmt = $this->conn->prepare($query);
                 $stmt->bindParam(":slug", $slug);
                 $stmt->execute();
-                // return $stmt;
 
                 //get the array to insert into carts
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
