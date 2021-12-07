@@ -4,6 +4,7 @@ header("Content-Type: application/json; charset=UTF-8");
 
 include_once $_SERVER['DOCUMENT_ROOT'].'/api-for-shop/api/config/database.php';
 include_once $_SERVER['DOCUMENT_ROOT'].'/api-for-shop/api/controllers/addtocartclass.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/api-for-shop/api/controllers/functions.php';
 
 
 $data = json_decode(file_get_contents('php://input'));
@@ -14,7 +15,7 @@ $db = $database->getConnection();
 
 $slug = $_GET['product'];
 if(isset($data)){
-    $userId = $data->userId;
+    $userId = escape($data->userId);
 }
 
 $item = new Addtocart($db);

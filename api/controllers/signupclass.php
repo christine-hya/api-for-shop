@@ -1,6 +1,5 @@
 <?php
 
-//creating table
 
 class Signup
 {
@@ -13,10 +12,9 @@ class Signup
 
     public function signup($username, $fname, $lname, $email, $password)
     {
-        $message = [];
-        $json = [];
-        
+        $messages = [];
 
+        //check if username exists
         $stmtUExists = $this->conn->prepare(
             "SELECT * FROM users WHERE username=?"
         );
@@ -27,6 +25,7 @@ class Signup
         //if nothing matches that username
         if ($stmtUExists->fetch() != true) {
 
+        //create new entry/sign up
         $stmt = $this->conn->prepare("INSERT INTO users 
         (username, fname, lname, email, password, active)
         VALUES (?,?,?,?,?,?)");
@@ -42,23 +41,22 @@ class Signup
                 1
             ]);
             $i++;
+            $messages[] = 'Inserted ' . $i . ' rows into USERS table';
             //add user to JSON
-           
-            // $username = $json['username'];
-            // $fname = $json['fname'];
-            // $lname = $json['lname'];
-            // $email = $json['email'];
-            // return json_encode($json);
 
         } else {
-            $message[] = 'User already exists.';
-        }
+            $messages[] = 'User already exists.';
+        }   
+        
+        return $messages;
+    }
 
+    public function displayJSON($username){
+        $json = [];
         $stmtReturn = $this->conn->prepare("SELECT userId, username, fname, lname, email FROM users 
         WHERE username=?");
 
         $stmtReturn->execute([$username]);
-
 
         while ($row = $stmtReturn->fetch(PDO::FETCH_ASSOC)){
 
@@ -72,8 +70,6 @@ class Signup
                 return json_encode($json);
             }
         }
-        $message[] = 'Inserted ' . $i . ' rows into USERS table';
-        return $message;
     }
 }
 
