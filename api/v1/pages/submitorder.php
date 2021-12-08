@@ -6,7 +6,7 @@ header('Access-Control-Allow-Headers: Content-Type, Authorization');
 
 
 include_once $_SERVER['DOCUMENT_ROOT'] . '/api-for-shop/api/config/database.php';
-include_once $_SERVER['DOCUMENT_ROOT'] . '/api-for-shop/api/controllers/contactclass.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/api-for-shop/api/controllers/submitorderclass.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/api-for-shop/api/controllers/functions.php';
 
 $data = json_decode(file_get_contents('php://input'));
@@ -15,6 +15,7 @@ $name = '';
 $surname = '';
 $email = '';
 $message = '';
+$cartItems = '';
 
 $database = new Database();
 $db = $database->getConnection();
@@ -24,13 +25,14 @@ if (isset($data)) {
     $surname = escape($data->surname);
     $email = escape($data->email);
     $message = escape($data->message);
+    $cartItems = escape($data->cartItems);
 }
 
     http_response_code(200);
 
-    $contact = new Contact($db);
+    $order = new Order($db);
 
-    $messages = $contact->submitMsg($name, $surname, $email, $message);
+    $messages = $order->submitOrder($name, $surname, $email, $message, $cartItems);
 
     foreach ($messages as $message) {
         echo json_encode([
@@ -38,11 +40,6 @@ if (isset($data)) {
             'message' => $message
         ]);
     }
-
-    // $json = $signup->displayJSON($username);
-    // if ($json) {
-    //     echo $json;
-    // }
 
 exit();
    
