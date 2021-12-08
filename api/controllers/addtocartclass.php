@@ -55,7 +55,7 @@ class Addtocart {
                         $cartProducts['price'] = $row['price'];
                         $cartProducts['image'] = $row['image'];
                         $cartProducts['userId'] = $userId;
-                        // return json_encode($cartProducts);
+                        // return $cartProducts;
                         print_r($cartProducts);
                         $i++;
                     }
