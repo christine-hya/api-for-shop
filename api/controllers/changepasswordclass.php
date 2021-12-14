@@ -21,7 +21,7 @@ class Changepwd
             PASSWORD_DEFAULT), $userId]);
 
         if ($stmt) {
-            $messages[] = 'Password succesfully updated';
+            $messages[] = 'Password succesfully updated.';
             
         }else {
             $messages[] = 'Error in updating password.';

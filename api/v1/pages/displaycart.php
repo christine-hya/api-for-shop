@@ -29,10 +29,7 @@ $arr['count'] = $itemCount;
 if ($itemCount == 0) {
     http_response_code(200);
     echo json_encode(
-        $arr['response'] = array(
-            "userId" => $userId,
-            "message" => "No items in cart."
-        )
+        $arr['message'] = "No items in cart."       
     );
 }
 

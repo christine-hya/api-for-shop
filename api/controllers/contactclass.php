@@ -22,7 +22,7 @@ class Contact
             $message
         ]);
 
-        $messages[] = 'Message submitted';
+        $messages[] = 'Your message has been submitted.';
         return $messages;
     }
 }

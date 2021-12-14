@@ -39,11 +39,6 @@ if (isset($data)) {
         ]);
     }
 
-    // $json = $signup->displayJSON($username);
-    // if ($json) {
-    //     echo $json;
-    // }
-
 exit();
    
 
