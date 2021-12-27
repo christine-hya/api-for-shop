@@ -1,7 +1,8 @@
 <IfModule dir_module>
     DirectoryIndex index.html index.php
+    Options -MultiViews
 </IfModule>
-Options +FollowSymLinks -MultiViews
+
 RewriteEngine On
 RewriteBase /api-for-shop
 
