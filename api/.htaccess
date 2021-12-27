@@ -1,4 +1,4 @@
-Options +FollowSymLinks
+Options +FollowSymLinks -MultiViews
 RewriteEngine On
 RewriteBase /api-for-shop
 
