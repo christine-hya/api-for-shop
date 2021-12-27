@@ -1,4 +1,4 @@
-Options +FollowSymLinks -MultiViews
+Options +FollowSymLinks
 RewriteEngine On
 RewriteBase https://christine-hogg.herokuapp.com
 
