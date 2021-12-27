@@ -1,10 +1,9 @@
 <IfModule dir_module>
     DirectoryIndex index.html index.php
 </IfModule>
-
 Options +FollowSymLinks -MultiViews
 RewriteEngine On
-RewriteBase /api
+RewriteBase /app
 
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s([^.]+)\.php [NC]
 RewriteRule ^ %1 [R=302,L]
