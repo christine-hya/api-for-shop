@@ -2,7 +2,7 @@
     "scripts": {
         "post-install-cmd": [
             "php artisan clear-compiled",
-            "chmod -R 777 api/"
+            "chmod -R 777 api-for-shop/"
         ]
     }
 }
