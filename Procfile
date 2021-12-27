@@ -1,1 +1,1 @@
-web: vendor/bin/heroku-php-apache2 api-for-shop/
+web: vendor/bin/heroku-php-apache2

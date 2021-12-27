@@ -1,4 +1,5 @@
-<IfModule dir_module>
+<IfModule mod_rewrite.c>
+<IfModule mod_negotiation.c>
     DirectoryIndex index.html index.php
     Options -MultiViews
 </IfModule>
@@ -12,3 +13,5 @@ RewriteRule ^ %1 [R=302,L]
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.php -f
 RewriteRule ^(.*?)/?$ api/$1.php [L]
+
+RewriteC
